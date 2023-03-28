@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './home/home.component';
 import { OffcampusComponent } from './offcampus/offcampus.component';
-import { OncampusComponent } from './oncampus/oncampus.component';
+import { MatTableModule } from '@angular/material/table';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -22,8 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     NavComponent,
     HomeComponent,
-    OffcampusComponent,
-    OncampusComponent
+    OffcampusComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

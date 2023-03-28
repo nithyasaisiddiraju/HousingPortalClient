@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Service} from '../app/app.service';
+import { OffcampusListingService } from '../app/app.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,8 @@ import {Service} from '../app/app.service';
 })
 export class AppComponent {
   title = 'CSUN Housing Portal';
-  constructor(private service: Service) { }
+  constructor(private service: OffcampusListingService) { }
   ngOnInit(): void {
-    this.service.sampleget();
+    this.service.getOffCampusListings();
   }
 }

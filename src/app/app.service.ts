@@ -4,19 +4,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class Service {
-  result: string = 'From Server: ';
+export class OffcampusListingService {
+  private apiUrl = 'http://localhost:7068/api/offcampuslistings';
 
   constructor(private http: HttpClient) { }
 
-  sampleget() {
-    this.http.get<any>('https://localhost:7068/api/getName', { responseType: 'json' }).subscribe(
-      res => {
-        console.log('output: ' + res);
-        this.result = this.result + res;
-        alert('RES::' + this.result);
-      },
-      err => console.log('error: ' + err)
-    );
+  getOffCampusListings() {
+    return this.http.get<any>(this.apiUrl, { responseType: 'json' });
   }
 }

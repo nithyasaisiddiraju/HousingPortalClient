@@ -27,6 +27,7 @@
         <td>{{ listing.userid }}</td>
         <td>{{ listing.createdAt }}</td>
         <td>{{ listing.updatedAt }}</td>
+        <td><a [routerLink] = "['/listings', 'edit', listing.id]" >Edit</a></td>
       </tr>
     </tbody>
   </table>

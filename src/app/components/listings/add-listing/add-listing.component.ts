@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Listings } from 'src/app/models/listings.model';
 import { ListingsService } from 'src/app/services/listings.service';
 
@@ -10,7 +11,7 @@ import { ListingsService } from 'src/app/services/listings.service';
 export class AddListingComponent implements OnInit{
 
   addListingRequest: Listings = {
-    id: 0,
+    id: '',
     title: '',
     description: '',
     address: '',
@@ -22,7 +23,7 @@ export class AddListingComponent implements OnInit{
     updatedAt: ''
   }
 
-  constructor(private listingService: ListingsService) { }
+  constructor(private listingService: ListingsService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -32,7 +33,7 @@ export class AddListingComponent implements OnInit{
     this.listingService.addListing(this.addListingRequest)
     .subscribe({
       next: (listing) => {
-        console.log(listing);
+        this.router.navigate(['listings'])
       }
     })
   }

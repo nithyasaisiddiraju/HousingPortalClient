@@ -17,7 +17,21 @@ export class ListingsService {
   }
 
   addListing(addListingRequest: Listings): Observable<Listings> {
-    addListingRequest.id = 0;
+    addListingRequest.id = '00000000-0000-0000-0000-000000000000';
     return this.http.post<Listings>(this.baseApiUrl + '/api/listings', addListingRequest);
+  }
+
+  getListing(id: string): Observable<Listings> {
+    return this.http.get<Listings>(`${this.baseApiUrl}/api/listings/${id}`);
+  }
+
+  updateListing(id: string, updateListingRequest: Listings):
+  Observable<Listings> {
+    return this.http.put<Listings>(this.baseApiUrl + '/api/listings/' + id,
+    updateListingRequest);
+  }
+
+  deleteListing(id: string): Observable<Listings> {
+    return this.http.delete<Listings>(this.baseApiUrl + '/api/listings/' + id);
   }
 }

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { OffcampusComponent } from './offcampus/offcampus.component';
+import { AddListingComponent } from './components/listings/add-listing/add-listing.component';
+import { PropertiesListComponent } from './components/listings/properties-list/properties-list.component';
 
 const routes: Routes = [
-  {path:'home', component:HomeComponent},
-  {path:'offcampus', component:OffcampusComponent},
-  {path:'**', component:HomeComponent}
+  { path: '', component: PropertiesListComponent },
+  { path: 'listings', component: PropertiesListComponent},
+  { path: 'listings/add', component: AddListingComponent}
 ];
 
 @NgModule({

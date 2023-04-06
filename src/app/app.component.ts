@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { OffcampusListingService } from '../app/app.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +6,8 @@ import { OffcampusListingService } from '../app/app.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'CSUN Housing Portal';
-  constructor(private service: OffcampusListingService) { }
+  title = 'CSUN Off-Campus Housing Portal';
+  constructor() { }
   ngOnInit(): void {
-    this.service.getOffCampusListings();
   }
 }

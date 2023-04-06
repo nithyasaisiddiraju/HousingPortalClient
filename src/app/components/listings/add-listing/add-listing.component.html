@@ -1,0 +1,43 @@
+<div class="container my-5">
+  <h1 class="mb-3">Add New Listing</h1>
+  <div class="row">
+    <div class="col-6">
+      <form #form="ngForm" (ngSubmit)="addListing()">
+
+        <div class="mb-3">
+          <label for="" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title"
+          name="title" [(ngModel)] = "addListingRequest.title">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Description</label>
+          <input type="text" class="form-control" id="description"
+          name="description" [(ngModel)] = "addListingRequest.description">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Address</label>
+          <input type="text" class="form-control" id="address"
+          name="address" [(ngModel)] = "addListingRequest.address">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Price</label>
+          <input type="number" class="form-control" id="price"
+          name="price" [(ngModel)] = "addListingRequest.price">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Contact</label>
+          <input type="number" class="form-control" id="contact"
+          name="contact" [(ngModel)] = "addListingRequest.contact">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email"
+          name="email" [(ngModel)] = "addListingRequest.email">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</div>

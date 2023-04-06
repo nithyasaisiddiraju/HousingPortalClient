@@ -1,0 +1,34 @@
+<div class="'container my-5">
+  <h1 class = "mb-3">Listings</h1>
+  <table class = "table" *ngIf="listings && listings.length > 0">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Address</th>
+        <th>Price</th>
+        <th>Contact</th>
+        <th>Email</th>
+        <th>UserId</th>
+        <th>CreatedAt</th>
+        <th>UpdatedAt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let listing of listings">
+        <td>{{ listing.id }}</td>
+        <td>{{ listing.title }}</td>
+        <td>{{ listing.description }}</td>
+        <td>{{ listing.address }}</td>
+        <td>{{ listing.price }}</td>
+        <td>{{ listing.contact }}</td>
+        <td>{{ listing.email }}</td>
+        <td>{{ listing.userid }}</td>
+        <td>{{ listing.createdAt }}</td>
+        <td>{{ listing.updatedAt }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!listings || listings.length <= 0">No Listings Found</p>
+</div>

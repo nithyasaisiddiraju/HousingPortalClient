@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OffcampusComponent } from './offcampus.component';
+import { AddListingComponent } from './add-listing.component';
 
-describe('OffcampusComponent', () => {
-  let component: OffcampusComponent;
-  let fixture: ComponentFixture<OffcampusComponent>;
+describe('AddListingComponent', () => {
+  let component: AddListingComponent;
+  let fixture: ComponentFixture<AddListingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OffcampusComponent ]
+      declarations: [ AddListingComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OffcampusComponent);
+    fixture = TestBed.createComponent(AddListingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

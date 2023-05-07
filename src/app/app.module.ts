@@ -6,21 +6,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PropertiesListComponent } from './components/listings/properties-list/properties-list.component';
 import { AddListingComponent } from './components/listings/add-listing/add-listing.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule along with FormsModule
 import { EditListingComponent } from './components/listings/edit-listing/edit-listing.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PropertiesListComponent,
     AddListingComponent,
-    EditListingComponent
+    EditListingComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule // Add ReactiveFormsModule to imports array
   ],
   providers: [],
   bootstrap: [AppComponent]

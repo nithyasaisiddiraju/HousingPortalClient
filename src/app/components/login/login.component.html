@@ -1,0 +1,39 @@
+<div class="container-login">
+  <div class="wrap-login">
+    <span class="login-form-title">
+      Student Login
+    </span>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="wrap-input">
+        <input type="text" formControlName="username" class="input" placeholder="Username" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input">
+        <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password" class="input" placeholder="Password" required>
+        <span class="focus-input"></span>
+        <span class="input-group-text password-toggle" (click)="togglePasswordVisibility()">
+          <i class="fas" [ngClass]="{'fa-eye': !isPasswordVisible, 'fa-eye-slash': isPasswordVisible}"></i>
+        </span>
+      </div>
+      <div class="container-login-form-btn">
+        <button class="login-form-btn" type="submit" [disabled]="!loginForm.valid">Login</button>
+      </div>
+      <div class="text-center" style="padding-top: 16px;">
+        <span class="txt1">
+          Forgot
+        </span>
+        <a href="#" class="txt2">
+          Username / Password?
+        </a>
+      </div>
+      <div class="text-center" style="padding-top: 16px;">
+        <span class="txt1">
+          Don't have an account?
+        </span>
+        <a href="/signup" class="txt2">
+          SignUp
+        </a>
+      </div>
+    </form>
+  </div>
+</div>

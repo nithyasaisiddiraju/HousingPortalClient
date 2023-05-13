@@ -1,46 +1,15 @@
 <div class="container-login">
-  <div class="signup-wrap-login">
+  <div class="wrap-login">
     <span class="login-form-title">
       Student Registration
     </span>
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="login-form">
-      <div class="wrap-input">
-        <input type="text" formControlName="firstName" class="input" placeholder="First Name" required>
+    <form [formGroup]="signupForm" (ngSubmit)="onSignUp()" class="login-form">
+      <div class="wrap-input" *ngFor="let field of signupFields">
+        <input [type]="field.type" formControlName="{{field.name}}" class="input" [placeholder]="field.placeholder">
         <span class="focus-input"></span>
-      </div>
-
-      <div class="wrap-input">
-        <input type="text" formControlName="lastName" class="input" placeholder="Last Name" required>
-        <span class="focus-input"></span>
-      </div>
-
-      <div class="wrap-input">
-        <input type="email" formControlName="email" class="input" placeholder="Email Address" required>
-        <span class="focus-input"></span>
-      </div>
-
-      <div class="wrap-input">
-        <input type="text" formControlName="contact" class="input" placeholder="Contact" required>
-        <span class="focus-input"></span>
-      </div>
-
-      <div class="wrap-input">
-        <input type="password" formControlName="password" class="input" placeholder="Password" required>
-        <span class="focus-input"></span>
-      </div>
-
-      <div class="wrap-input">
-        <input type="password" formControlName="confirmPassword" class="input" placeholder="Confirm Password" required>
-        <span class="focus-input"></span>
-      </div>
-
-      <div class="form-group" *ngIf="signupForm.errors && signupForm.errors['passwordMismatch']">
-        <small class="text-danger">Passwords do not match</small>
-      </div>
-
-      <div class="wrap-input">
-        <input type="text" formControlName="schoolYear" class="input" placeholder="School Year" required>
-        <span class="focus-input"></span>
+        <div *ngIf="isFieldInvalid(field.name)" class="form-group-error">
+          <small class="text-danger">{{ getFieldErrorMessage(field.name) }}</small>
+        </div>
       </div>
 
       <div class="form-group">
@@ -49,9 +18,21 @@
           <label class="form-check-label" for="termsOfService">I agree to the Terms of Service</label>
         </div>
       </div>
+      <div *ngIf="isFieldInvalid('termsOfService') && signupForm.get('termsOfService')?.value === false" class="form-group-error">
+        <small class="text-danger">You must agree to the Terms of Service</small>
+      </div>
 
       <div class="container-login-form-btn">
-        <button class="login-form-btn" type="submit" [disabled]="!signupForm.valid">Register</button>
+        <button class="login-form-btn" type="submit" [disabled]="signupForm.invalid">Register</button>
+      </div>
+
+      <div class="text-center" style="padding-top: 16px;">
+        <span class="txt1">
+          Already have an account?
+        </span>
+        <a href="/login" class="txt2">
+          Login
+        </a>
       </div>
     </form>
   </div>

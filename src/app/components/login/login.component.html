@@ -3,21 +3,37 @@
     <span class="login-form-title">
       Student Login
     </span>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-      <div class="wrap-input">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+
+      <div class="wrap-input" [class.has-error]="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
         <input type="text" formControlName="username" class="input" placeholder="Username" required>
         <span class="focus-input"></span>
       </div>
-      <div class="wrap-input">
+      <div class="form-group" *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
+        <small class="text-danger">Username is required</small>
+      </div>
+
+      <div class="wrap-input" [class.has-error]="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
         <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password" class="input" placeholder="Password" required>
         <span class="focus-input"></span>
         <span class="input-group-text password-toggle" (click)="togglePasswordVisibility()">
           <i class="fas" [ngClass]="{'fa-eye': !isPasswordVisible, 'fa-eye-slash': isPasswordVisible}"></i>
         </span>
       </div>
-      <div class="container-login-form-btn">
-        <button class="login-form-btn" type="submit" [disabled]="!loginForm.valid">Login</button>
+      <div class="form-group" *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+        <small class="text-danger">Password is required</small>
       </div>
+
+      <div class="container-login-form-btn">
+        <button class="login-form-btn" type="submit" [disabled]="loginForm.invalid">Login</button>
+      </div>
+
+      <div class="text-center" style="padding-top: 16px;" *ngIf="loginError">
+        <span class="txt1 text-danger">
+          {{loginError}}
+        </span>
+      </div>
+
       <div class="text-center" style="padding-top: 16px;">
         <span class="txt1">
           Forgot
@@ -26,6 +42,7 @@
           Username / Password?
         </a>
       </div>
+
       <div class="text-center" style="padding-top: 16px;">
         <span class="txt1">
           Don't have an account?
@@ -34,6 +51,7 @@
           SignUp
         </a>
       </div>
+
     </form>
   </div>
 </div>

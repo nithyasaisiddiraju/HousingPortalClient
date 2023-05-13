@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,33 +9,74 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
+  isText = false;
+  eyeIcon = 'fa-eye-slash';
 
-  constructor(private formBuilder: FormBuilder) { }
+  signupFields = [
+    { name: 'firstName', placeholder: 'First Name', type: 'text' },
+    { name: 'lastName', placeholder: 'Last Name', type: 'text' },
+    { name: 'email', placeholder: 'Email', type: 'email' },
+    { name: 'contact', placeholder: 'Contact', type: 'tel' },
+    { name: 'password', placeholder: 'Password', type: 'password' },
+    { name: 'confirmPassword', placeholder: 'Confirm Password', type: 'password' },
+  ];
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      contact: ['', Validators.required],
-      password: ['', Validators.required],
+      contact: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10), Validators.maxLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      schoolYear: ['', Validators.required],
       termsOfService: [false, Validators.requiredTrue]
     }, {
-      validators: this.passwordMismatch
+      validators: this.passwordMatchValidator('password', 'confirmPassword')
     });
   }
 
-  onSubmit(): void {
+  hideShowPass(): void {
+    this.isText = !this.isText;
+    this.eyeIcon = this.isText ? 'fa-eye' : 'fa-eye-slash';
+  }
+
+  onSignUp(): void {
     if (this.signupForm.valid) {
-      console.log('Form submitted:', this.signupForm.value);
+      // Perform signup logic
+      console.log(this.signupForm.value);
+    } else {
+      this.signupForm.markAllAsTouched();
     }
   }
 
-  passwordMismatch(formGroup: FormGroup) {
-    const password = formGroup.get('password')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
+  private passwordMatchValidator(passwordKey: string, confirmPasswordKey: string) {
+    return (group: FormGroup) => {
+      const password = group.controls[passwordKey];
+      const confirmPassword = group.controls[confirmPasswordKey];
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setErrors({ passwordMismatch: true });
+      } else {
+        confirmPassword.setErrors(null);
+      }
+    };
+  }
+
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.signupForm.get(fieldName);
+    return !!field && field.invalid && (field.dirty || field.touched);
+  }
+
+  getFieldErrorMessage(fieldName: string): string {
+    const field = this.signupForm.get(fieldName);
+    if (field?.errors?.['required']) {
+      return `${fieldName} is required`;
+    } else if (field?.errors?.['email']) {
+      return `Invalid ${fieldName} address`;
+    } else if (field?.errors?.['passwordMismatch']) {
+      return `Passwords do not match`;
+    }
+    return '';
   }
 }

@@ -156,3 +156,58 @@
     .form-check {
       margin-bottom: 10px;
     }
+
+    .account-options a, .account-options button {
+      background-color: #fff;
+      border: 1px solid #d9d9d9;
+      border-radius: 5px;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #333;
+      margin-left: 10px;
+    }
+
+    .account-options a:hover, .account-options button:hover {
+      background-color: #ff0000;
+      color: #fff;
+      border-color: #ff0000;
+    }
+
+    .dashboard-listing {
+      border: 1px solid #d9d9d9;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .dashboard-listing h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .wrap-dashboard {
+      width: 800px; /* adjust this value as needed */
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 77px 55px 33px 55px;
+      box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .container-dashboard {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      background-image: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb);
+    }

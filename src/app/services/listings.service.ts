@@ -16,8 +16,7 @@ export class ListingsService {
     return this.http.get<Listings[]>(this.baseApiUrl + '/api/listings')
   }
 
-  addListing(addListingRequest: Listings): Observable<Listings> {
-    addListingRequest.id = '00000000-0000-0000-0000-000000000000';
+  addListing(addListingRequest: FormData): Observable<Listings> {
     return this.http.post<Listings>(this.baseApiUrl + '/api/listings', addListingRequest);
   }
 

@@ -1,29 +1,22 @@
+<!-- student-dashboard.component.html -->
 <div class="container-dashboard">
   <div class="wrap-dashboard">
     <div class="dashboard-header">
       <h1>Student Dashboard</h1>
-      <div class="account-options">
-        <a routerLink="/account">Account</a>
-        <button (click)="onLogout()">Logout</button>
+      <div class="dashboard-links">
+        <a routerLink="/listings/add">Add Listing</a>
+        <a routerLink="/listings">Find a roommate</a>
       </div>
     </div>
 
-    <div class="add-listing">
-      <a routerLink="/add-listing">Add New Listing</a>
-    </div>
-
-    <div *ngIf="listings?.length > 0; else noListings">
+    <!-- Add the postcards for the listings here -->
+    <div *ngIf="listings?.length && listings.length > 0; else noListings">
       <div class="dashboard-listing" *ngFor="let listing of listings">
+        <img src="path/to/your/image" alt="{{ listing.title }}" />
         <h2>{{ listing.title }}</h2>
-        <p>{{ listing.description }}</p>
-        <p>Address: {{ listing.address }}</p>
         <p>Price: {{ listing.price }}</p>
-        <p>Contact: {{ listing.contact }}</p>
-        <p>Email: {{ listing.email }}</p>
-        <p>Posted by: {{ listing.userid }}</p>
       </div>
     </div>
-
     <ng-template #noListings>
       <p>No listings found</p>
     </ng-template>

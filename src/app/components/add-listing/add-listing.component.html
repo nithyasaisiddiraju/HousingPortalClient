@@ -1,0 +1,63 @@
+<div class="container-add-listing">
+  <div class="wrap-add-listing">
+    <span class="login-form-title">
+      Add a Listing
+    </span>
+    <form [formGroup]="addListingForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="add-listing-form">
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['title'].invalid && addListingForm.controls['title'].touched">
+        <input type="text" formControlName="title" class="input" placeholder="Title" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['description'].invalid && addListingForm.controls['description'].touched">
+        <textarea formControlName="description" class="input" placeholder="Description" required></textarea>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['price'].invalid && addListingForm.controls['price'].touched">
+        <input type="number" formControlName="price" class="input" placeholder="Price" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['category'].invalid && addListingForm.controls['category'].touched">
+        <select formControlName="category" class="input" required>
+          <option value="" selected disabled>Category</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+        </select>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['location'].invalid && addListingForm.controls['location'].touched">
+        <input type="text" formControlName="location" class="input" placeholder="Location" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['address'].invalid && addListingForm.controls['address'].touched">
+        <input type="text" formControlName="address" class="input" placeholder="Address" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['city'].invalid && addListingForm.controls['city'].touched">
+        <input type="text" formControlName="city" class="input" placeholder="City" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['state'].invalid && addListingForm.controls['state'].touched">
+        <input type="text" formControlName="state" class="input" placeholder="State" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['zip'].invalid && addListingForm.controls['zip'].touched">
+        <input type="text" formControlName="zip" class="input" placeholder="Zip" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['phone'].invalid && addListingForm.controls['phone'].touched">
+        <input type="text" formControlName="phone" class="input" placeholder="Phone" required>
+        <span class="focus-input"></span>
+      </div>
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['email'].invalid && addListingForm.controls['email'].touched">
+        <input type="text" formControlName="email" class="input" placeholder="Email" required>
+        <span class="focus-input"></span>
+      </div>
+      <!-- Image -->
+      <div class="wrap-input" [class.has-error]="addListingForm.controls['image'].invalid && addListingForm.controls['image'].touched">
+        <input type="file" formControlName="image" class="input" (change)="onImageSelected($event)" required>
+        <span class="focus-input"></span>
+      </div>
+    </form>
+  </div>
+  <div class="container-login-form-btn">
+    <button class="login-form-btn" type="submit" [disabled]="addListingForm.invalid">Add Listing</button>
+  </div>
+</div>

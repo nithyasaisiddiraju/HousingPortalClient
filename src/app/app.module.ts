@@ -12,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
+import { AddListingComponent } from './components/add-listing/add-listing.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { StudentDashboardComponent } from './components/student-dashboard/studen
     LoginComponent,
     SignupComponent,
     StudentDashboardComponent,
+    AddListingComponent,
   ],
   imports: [
     BrowserModule,

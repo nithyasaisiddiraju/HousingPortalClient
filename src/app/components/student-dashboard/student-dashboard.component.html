@@ -3,25 +3,28 @@
   <div class="wrap-dashboard">
     <div class="dashboard-header">
       <h1>Student Dashboard</h1>
-      <div class="dashboard-links">
-        <a routerLink="/listings/add">Add Listing</a>
-        <a routerLink="/listings">Find a roommate</a>
-      </div>
     </div>
 
     <!-- Add the postcards for the listings here -->
-    <div *ngIf="listings?.length && listings.length > 0; else noListings">
-      <div class="card mb-4" *ngFor="let listing of listings">
-        <img class="card-img-top" src="src\assets\Property.jpg" alt="{{ listing.title }}">
-        <div class="card-body">
-          <h2 class="card-title">{{ listing.title }}</h2>
-          <p class="card-text">Price: {{ listing.price }}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+
+    <div class="row" >
+      <div class="col-sm-4"  *ngFor="let listing of listings">
+        <div  style="background-image: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb);" class="card" >
+          <div class="card-body">
+            <!-- <h5 class="card-title"> -->
+              <img class="card-img-top" style="width: 50%;" src="assets/Property.jpg" alt="{{ listing.title }}">
+            <!-- </h5> -->
+            <h2 class="card-title">{{ listing.title }}</h2>
+            <p class="card-text">Price: {{ listing.price }}</p>
+            <a [routerLink]="['/listing-details', listing.listingId]" class="btn btn-primary">Details</a>
+          </div>
         </div>
       </div>
-    </div>
+      </div>
     <ng-template #noListings>
       <p>No listings found</p>
     </ng-template>
   </div>
 </div>
+
+

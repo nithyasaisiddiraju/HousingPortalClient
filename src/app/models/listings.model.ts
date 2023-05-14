@@ -1,5 +1,14 @@
-export interface Listings {
-  id: string;
+export interface Student {
+  studentId: string;
+  name: string;
+  email: string;
+  phone: string;
+  major: string;
+  graduationYear: number;
+}
+
+export interface Listing {
+  listingId: string;
   title: string;
   description: string;
   address: string;
@@ -7,10 +16,6 @@ export interface Listings {
   city: string;
   state: string;
   zip: string;
-  phone: string;
-  email: string;
   image: string;
-  userid: string;
-  createdAt: string;
-  updatedAt: string;
+  studentDto: Student;
 }

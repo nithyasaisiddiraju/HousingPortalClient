@@ -1,63 +1,90 @@
 <div class="container-add-listing">
   <div class="wrap-add-listing">
-    <span class="login-form-title">
-      Add a Listing
-    </span>
+    <h2 class="mb-4">Add a Listing</h2>
     <form [formGroup]="addListingForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="add-listing-form">
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['title'].invalid && addListingForm.controls['title'].touched">
-        <input type="text" formControlName="title" class="input" placeholder="Title" required>
-        <span class="focus-input"></span>
+
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Title -->
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" formControlName="title" class="form-control" id="title" placeholder="Title" required>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea formControlName="description" class="form-control" id="description" rows="3" placeholder="Description" required></textarea>
+          </div>
+
+          <!-- Price -->
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" formControlName="price" class="form-control" id="price" placeholder="Price" required>
+          </div>
+
+          <!-- Category -->
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select formControlName="category" class="form-control" id="category" required>
+              <option value="" selected disabled>Category</option>
+              <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <!-- Address -->
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" formControlName="address" class="form-control" id="address" placeholder="Address" required>
+          </div>
+
+          <!-- City -->
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" formControlName="city" class="form-control" id="city" placeholder="City" required>
+          </div>
+
+          <!-- State -->
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" formControlName="state" class="form-control" id="state" placeholder="State" required>
+          </div>
+
+          <!-- Zip -->
+          <div class="form-group">
+            <label for="zip">Zip</label>
+            <input type="text" formControlName="zip" class="form-control" id="zip" placeholder="Zip" required>
+          </div>
+        </div>
       </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['description'].invalid && addListingForm.controls['description'].touched">
-        <textarea formControlName="description" class="input" placeholder="Description" required></textarea>
-        <span class="focus-input"></span>
+
+      <hr class="my-4">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" formControlName="email" class="form-control" id="email" placeholder="Email" required>
       </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['price'].invalid && addListingForm.controls['price'].touched">
-        <input type="number" formControlName="price" class="input" placeholder="Price" required>
-        <span class="focus-input"></span>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" formControlName="phone" class="form-control" id="phone" placeholder="Phone" required>
       </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['category'].invalid && addListingForm.controls['category'].touched">
-        <select formControlName="category" class="input" required>
-          <option value="" selected disabled>Category</option>
-          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-        </select>
+
+              <!-- Image -->
+              <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" formControlName="image" class="form-control-file" id="image" (change)="onImageSelected($event)" required>
+              </div>
+
+              <!-- Submit button -->
+              <div class="form-group">
+                <button class="btn btn-primary" type="submit" [disabled]="addListingForm.invalid">Add Listing</button>
+              </div>
+
+            </form>
+          </div>
       </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['location'].invalid && addListingForm.controls['location'].touched">
-        <input type="text" formControlName="location" class="input" placeholder="Location" required>
-        <span class="focus-input"></span>
-      </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['address'].invalid && addListingForm.controls['address'].touched">
-        <input type="text" formControlName="address" class="input" placeholder="Address" required>
-        <span class="focus-input"></span>
-      </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['city'].invalid && addListingForm.controls['city'].touched">
-        <input type="text" formControlName="city" class="input" placeholder="City" required>
-        <span class="focus-input"></span>
-      </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['state'].invalid && addListingForm.controls['state'].touched">
-        <input type="text" formControlName="state" class="input" placeholder="State" required>
-        <span class="focus-input"></span>
-      </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['zip'].invalid && addListingForm.controls['zip'].touched">
-        <input type="text" formControlName="zip" class="input" placeholder="Zip" required>
-        <span class="focus-input"></span>
-      </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['phone'].invalid && addListingForm.controls['phone'].touched">
-        <input type="text" formControlName="phone" class="input" placeholder="Phone" required>
-        <span class="focus-input"></span>
-      </div>
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['email'].invalid && addListingForm.controls['email'].touched">
-        <input type="text" formControlName="email" class="input" placeholder="Email" required>
-        <span class="focus-input"></span>
-      </div>
-      <!-- Image -->
-      <div class="wrap-input" [class.has-error]="addListingForm.controls['image'].invalid && addListingForm.controls['image'].touched">
-        <input type="file" formControlName="image" class="input" (change)="onImageSelected($event)" required>
-        <span class="focus-input"></span>
-      </div>
-    </form>
-  </div>
-  <div class="container-login-form-btn">
-    <button class="login-form-btn" type="submit" [disabled]="addListingForm.invalid">Add Listing</button>
-  </div>
-</div>

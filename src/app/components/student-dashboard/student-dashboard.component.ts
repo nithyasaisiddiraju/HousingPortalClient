@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ListingsService } from 'src/app/services/listings.service';
-import { Listings } from 'src/app/models/listings.model';
+import { Listing } from 'src/app/models/listings.model';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -11,11 +11,11 @@ import { Listings } from 'src/app/models/listings.model';
 })
 
 export class StudentDashboardComponent implements OnInit {
-  listings: Listings[] = [];
+  listings: Listing[] = [];
 
   constructor(private authService: AuthService, private router: Router, private listingsService: ListingsService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.listingsService.getAllListings().subscribe(listings => {
       this.listings = listings;
     });

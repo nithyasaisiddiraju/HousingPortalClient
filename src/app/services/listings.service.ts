@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Listings } from '../models/listings.model';
+import { Listing} from '../models/listings.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +12,25 @@ export class ListingsService {
   baseApiUrl: string = environment.baseApiUrl
   constructor(private http: HttpClient) { }
 
-  getAllListings(): Observable<Listings[]> {
-    return this.http.get<Listings[]>(this.baseApiUrl + '/api/listings')
+  getAllListings(): Observable<Listing[]> {
+    return this.http.get<Listing[]>(this.baseApiUrl + '/api/listings')
   }
 
-  addListing(addListingRequest: FormData): Observable<Listings> {
-    return this.http.post<Listings>(this.baseApiUrl + '/api/listings', addListingRequest);
+  addListing(addListingRequest: FormData): Observable<Listing> {
+    return this.http.post<Listing>(this.baseApiUrl + '/api/listings', addListingRequest);
   }
 
-  getListing(id: string): Observable<Listings> {
-    return this.http.get<Listings>(`${this.baseApiUrl}/api/listings/${id}`);
+  getListing(id: string): Observable<Listing> {
+    return this.http.get<Listing>(`${this.baseApiUrl}/api/listings/${id}`);
   }
 
-  updateListing(id: string, updateListingRequest: Listings):
-  Observable<Listings> {
-    return this.http.put<Listings>(this.baseApiUrl + '/api/listings/' + id,
+  updateListing(id: string, updateListingRequest: Listing):
+  Observable<Listing> {
+    return this.http.put<Listing>(this.baseApiUrl + '/api/listings/' + id,
     updateListingRequest);
   }
 
-  deleteListing(id: string): Observable<Listings> {
-    return this.http.delete<Listings>(this.baseApiUrl + '/api/listings/' + id);
+  deleteListing(id: string): Observable<Listing> {
+    return this.http.delete<Listing>(this.baseApiUrl + '/api/listings/' + id);
   }
 }

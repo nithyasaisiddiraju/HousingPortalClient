@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { ListingDetailsComponent } from './components/listing-details/listing-details.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     StudentDashboardComponent,
     AddListingComponent,
     LogoutComponent,
+    ListingDetailsComponent,
   ],
   imports: [
     BrowserModule,

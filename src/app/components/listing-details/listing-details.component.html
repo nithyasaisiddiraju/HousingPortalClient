@@ -1,0 +1,37 @@
+<ng-template #noListing>
+  <div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">Sorry!</h4>
+    <p>No listing found.</p>
+  </div>
+</ng-template>
+
+<div class="card mb-3" *ngIf="listing; else noListing">
+  <div class="row no-gutters">
+    <div class="col-md-6">
+      <img src="{{ listing.image }}" class="card-img" alt="{{ listing.title }}">
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <h5 class="card-title">{{ listing.title }}</h5>
+        <p class="card-text">{{ listing.description }}</p>
+        <p class="card-text"><small class="text-muted">Price: {{ listing.price }}</small></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Address: {{ listing.address }}</li>
+          <li class="list-group-item">City: {{ listing.city }}</li>
+          <li class="list-group-item">State: {{ listing.state }}</li>
+          <li class="list-group-item">Zip: {{ listing.zip }}</li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Student Details</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Name: {{ listing.studentDto.name }}</li>
+          <li class="list-group-item">Email: {{ listing.studentDto.email }}</li>
+          <li class="list-group-item">Phone: {{ listing.studentDto.phone }}</li>
+          <li class="list-group-item">Major: {{ listing.studentDto.major }}</li>
+          <li class="list-group-item">Graduation Year: {{ listing.studentDto.graduationYear }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

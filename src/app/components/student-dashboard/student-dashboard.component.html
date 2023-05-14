@@ -11,10 +11,13 @@
 
     <!-- Add the postcards for the listings here -->
     <div *ngIf="listings?.length && listings.length > 0; else noListings">
-      <div class="dashboard-listing" *ngFor="let listing of listings">
-        <img src="path/to/your/image" alt="{{ listing.title }}" />
-        <h2>{{ listing.title }}</h2>
-        <p>Price: {{ listing.price }}</p>
+      <div class="card mb-4" *ngFor="let listing of listings">
+        <img class="card-img-top" src="src\assets\Property.jpg" alt="{{ listing.title }}">
+        <div class="card-body">
+          <h2 class="card-title">{{ listing.title }}</h2>
+          <p class="card-text">Price: {{ listing.price }}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
       </div>
     </div>
     <ng-template #noListings>

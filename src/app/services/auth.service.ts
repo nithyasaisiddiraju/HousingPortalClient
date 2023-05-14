@@ -26,6 +26,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  public getCurrentUserId() {
+    return this.currentUserValue.id;
+  }
+
   isAuthenticated() : boolean {
     return this.getToken() != null;
   }
@@ -36,7 +40,8 @@ export class AuthService {
 
   login(username: string, password: string) {
     const body = { UserName: username, Password: password };
-    return this.http.post<any>(`${this.baseApiUrl}/api/user/authenticate`, body).pipe(
+    return this.http.post<any>(`${this.baseApiUrl}/api/user/authenticate`, body)
+    .pipe(
       tap(user => {
         if (user && user.token) {
           localStorage.setItem(this.tokenKey, JSON.stringify(user));

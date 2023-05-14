@@ -9,14 +9,16 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'CSUN Off-Campus Housing Portal';
+  isAuthenticated = false;
 
   constructor(public authService: AuthService, public router: Router) { }
 
   ngOnInit(): void {
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/logout']);
     }
   }

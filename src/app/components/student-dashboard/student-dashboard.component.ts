@@ -9,6 +9,7 @@ import { Listings } from 'src/app/models/listings.model';
   templateUrl: './student-dashboard.component.html',
   styleUrls: ['./student-dashboard.component.css']
 })
+
 export class StudentDashboardComponent implements OnInit {
   listings: Listings[] = [];
 

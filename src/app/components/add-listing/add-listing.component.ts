@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ListingsService } from 'src/app/services/listings.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class AddListingComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private listingsService: ListingsService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +64,8 @@ export class AddListingComponent implements OnInit {
     Object.keys(this.addListingForm.value).forEach(key => {
       formData.append(key, this.addListingForm.value[key]);
     });
+
+    formData.append("StudentId", this.authService.getCurrentUserId());
 
     this.listingsService.addListing(formData).subscribe(() => {
       this.router.navigate(['/listings']);

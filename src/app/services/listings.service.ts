@@ -43,7 +43,6 @@ export class ListingsService {
     );
   }
 
-
   getListing(id: string): Observable<Listing> {
     return this.http.get<Listing>(`${this.baseApiUrl}/api/listings/${id}`);
   }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ListingsService } from 'src/app/services/listings.service';
 import { UserService } from 'src/app/services/user.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-listing',
@@ -55,12 +56,9 @@ export class AddListingComponent implements OnInit {
       (response) => {
         this.student = response;
         console.log("Student Details: " + this.student.studentId);
-
-        // Update the studentId form control
         this.addListingForm.get('studentDto')?.get('studentId')?.setValue(this.student.studentId);
       },
       (error) => {
-        // Handle error if necessary
         console.error(error);
       }
     );

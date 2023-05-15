@@ -20,10 +20,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'housingportal_client'`, () => {
+  it(`should have as title 'CSUN Off-Campus Housing Portal'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('housingportal_client');
+    expect(app.title).toEqual('CSUN Off-Campus Housing Portal');
   });
 
   it('should render title', () => {

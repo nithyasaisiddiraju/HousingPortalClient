@@ -1,30 +1,22 @@
-<!-- student-dashboard.component.html -->
 <div class="container-dashboard">
   <div class="wrap-dashboard">
     <div class="dashboard-header">
-      <h1>Student Dashboard</h1>
+      <h1 class="dashboard-title">Student Dashboard</h1>
     </div>
-
-    <!-- Add the postcards for the listings here -->
-
-    <div class="row" >
-      <div class="col-sm-4"  *ngFor="let listing of listings">
-        <div  style="background-image: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb);" class="card" >
+    <div class="row">
+      <div class="col-sm-4" *ngFor="let listing of listings">
+        <div class="card">
           <div class="card-body">
-            <!-- <h5 class="card-title"> -->
-              <img class="card-img-top" style="width: 50%;" src="assets/Property.jpg" alt="{{ listing.title }}">
-            <!-- </h5> -->
+            <img class="card-img-top" src="assets/Prop3.jpeg" alt="{{ listing.title }}">
             <h2 class="card-title">{{ listing.title }}</h2>
             <p class="card-text">Price: {{ listing.price }}</p>
-            <a [routerLink]="['/listing-details', listing.listingId]" class="btn btn-primary">Details</a>
+            <a [routerLink]="['/listing-details', listing.listingId]" class="btn">More >></a>
           </div>
         </div>
       </div>
-      </div>
+    </div>
     <ng-template #noListings>
       <p>No listings found</p>
     </ng-template>
   </div>
 </div>
-
-

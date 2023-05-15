@@ -32,15 +32,15 @@ export class ListingDetailsComponent implements OnInit {
     console.log("Deleting Property :"+listingId)
     this.listingsService.deleteListing(listingId)
       .subscribe(response => {
-        // Handle successful delete here. For example, remove the listing from the UI, or navigate to a different page
         console.log('Listing deleted successfully:'+listingId);
-
-         // Navigate to home page
-         this.router.navigate(['/student-dashboard']);  // Update with your home route
+         this.router.navigate(['/student-dashboard']);
       }, error => {
-        // Handle error here
         console.error('An error occurred while deleting the listing:', error);
       });
+  }
+
+  onEdit(id: number) {
+    this.router.navigate(['/update-listing', id]);
   }
 
 }

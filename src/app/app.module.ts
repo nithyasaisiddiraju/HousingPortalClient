@@ -6,7 +6,6 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -15,6 +14,8 @@ import { StudentDashboardComponent } from './components/student-dashboard/studen
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { ListingDetailsComponent } from './components/listing-details/listing-details.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { UpdateListingComponent } from './components/update-listing/update-listing.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ListingDetailsComponent } from './components/listing-details/listing-de
     AddListingComponent,
     LogoutComponent,
     ListingDetailsComponent,
+    UpdateListingComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,8 +35,8 @@ import { ListingDetailsComponent } from './components/listing-details/listing-de
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

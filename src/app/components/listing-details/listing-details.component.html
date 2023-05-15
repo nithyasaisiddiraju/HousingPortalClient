@@ -1,13 +1,11 @@
-<ng-template #noListing>
-  <div class="alert alert-warning" role="alert">
-    <h4 class="alert-heading">Sorry!</h4>
-    <p>No listing found.</p>
+<div class="card mb-3" *ngIf="listing">
+  <div class="position-relative">
+    <div class="d-flex justify-content-end align-items-center mb-3">
+      <button class="btn btn-success me-3" (click)="onEdit(listing.listingId)">Edit</button>
+      <span class="mx-1"></span>
+      <button class="btn btn-danger me-3" (click)="onDelete(listing.listingId)">Delete</button>
+    </div>
   </div>
-</ng-template>
-
-<div class="card mb-3" *ngIf="listing; else noListing">
-    <button class="btn btn-danger position-absolute top-0 end-0 m-2" (click)="onDelete(listing.listingId)">Delete</button>
-
   <div class="row no-gutters">
     <div class="col-md-6">
       <img src="{{ listing.image }}" class="card-img" alt="{{ listing.title }}">

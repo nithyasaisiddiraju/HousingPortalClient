@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private _snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group(
     {
@@ -28,16 +28,21 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'OK', {
+      duration: 2000,
+    });
+  }
+
   onLogin(): void {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       this.authService.login(username, password).subscribe((result: any) => {
         this.loginError = null;
-        this.snackBar.open('Login successful', 'Close', {
-          duration: 2000,
-        });
+        this.openSnackBar('Successfully logged in!');
       }, (error: any) => {
         this.loginError = 'Invalid username or password';
+        this.openSnackBar(this.loginError);
       });
     }
   }

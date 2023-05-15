@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ListingsService } from './listings.service';
 
 describe('ListingsService', () => {
   let service: ListingsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],  // add HttpClientTestingModule here
+    });
     service = TestBed.inject(ListingsService);
   });
 

@@ -1,3 +1,13 @@
 .nav-link {
   cursor: pointer;
 }
+
+.navbar-custom {
+  background-color: rgb(54, 53, 53); /* Change the background color of the navbar */
+  font-size: 80%;
+}
+
+.navbar-brand, .nav-link {
+  color: #f7fafc !important; /* Change the color of the text */
+  font-size: 150%;
+}

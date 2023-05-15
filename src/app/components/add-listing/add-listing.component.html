@@ -1,90 +1,70 @@
 <div class="container-add-listing">
   <div class="wrap-add-listing">
-    <h2 class="mb-4">Add a Listing</h2>
-    <form [formGroup]="addListingForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="add-listing-form">
-
+    <h3 class="mb-4">Add a Property Listing</h3>
+    <form [formGroup]="addListingForm" (ngSubmit)="onSubmit()" class="add-listing-form" *ngIf="addListingForm">
       <div class="row">
-        <div class="col-md-6">
-          <!-- Title -->
-          <div class="form-group">
+
+        <div class="col-md-4">
+          <div class="form-group" [class.has-error]="addListingForm.controls['title']?.invalid && addListingForm.controls['title']?.touched">
             <label for="title">Title</label>
             <input type="text" formControlName="title" class="form-control" id="title" placeholder="Title" required>
+            <small *ngIf="addListingForm.controls['title']?.invalid && addListingForm.controls['title']?.touched" class="text-danger">Title is required.</small>
           </div>
-
-          <!-- Description -->
-          <div class="form-group">
+          <div class="form-group" [class.has-error]="addListingForm.controls['description']?.invalid && addListingForm.controls['description']?.touched">
             <label for="description">Description</label>
             <textarea formControlName="description" class="form-control" id="description" rows="3" placeholder="Description" required></textarea>
+            <small *ngIf="addListingForm.controls['description']?.invalid && addListingForm.controls['description']?.touched" class="text-danger">Description is required.</small>
           </div>
-
-          <!-- Price -->
-          <div class="form-group">
+          <div class="form-group" [class.has-error]="addListingForm.controls['price']?.invalid && addListingForm.controls['price']?.touched">
             <label for="price">Price</label>
             <input type="number" formControlName="price" class="form-control" id="price" placeholder="Price" required>
+            <small *ngIf="addListingForm.controls['price']?.invalid && addListingForm.controls['price']?.touched" class="text-danger">Price is required.</small>
           </div>
-
-          <!-- Category -->
-          <div class="form-group">
+          <div class="form-group" [class.has-error]="addListingForm.controls['category']?.invalid && addListingForm.controls['category']?.touched">
             <label for="category">Category</label>
             <select formControlName="category" class="form-control" id="category" required>
               <option value="" selected disabled>Category</option>
               <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
             </select>
+            <small *ngIf="addListingForm.controls['category']?.invalid && addListingForm.controls['category']?.touched" class="text-danger">Category is required.</small>
           </div>
         </div>
 
-        <div class="col-md-6">
-          <!-- Address -->
-          <div class="form-group">
+        <div class="col-md-4">
+          <div class="form-group" [class.has-error]="addListingForm.controls['address']?.invalid && addListingForm.controls['address']?.touched">
             <label for="address">Address</label>
             <input type="text" formControlName="address" class="form-control" id="address" placeholder="Address" required>
+            <small *ngIf="addListingForm.controls['address']?.invalid && addListingForm.controls['address']?.touched" class="text-danger">Address is required.</small>
           </div>
-
-          <!-- City -->
-          <div class="form-group">
+          <div class="form-group" [class.has-error]="addListingForm.controls['city']?.invalid && addListingForm.controls['city']?.touched">
             <label for="city">City</label>
             <input type="text" formControlName="city" class="form-control" id="city" placeholder="City" required>
+            <small *ngIf="addListingForm.controls['city']?.invalid && addListingForm.controls['city']?.touched" class="text-danger">City is required.</small>
           </div>
-
-          <!-- State -->
-          <div class="form-group">
+          <div class="form-group" [class.has-error]="addListingForm.controls['state']?.invalid && addListingForm.controls['state']?.touched">
             <label for="state">State</label>
             <input type="text" formControlName="state" class="form-control" id="state" placeholder="State" required>
+            <small *ngIf="addListingForm.controls['state']?.invalid && addListingForm.controls['state']?.touched" class="text-danger">State is required.</small>
           </div>
-
-          <!-- Zip -->
-          <div class="form-group">
+          <div class="form-group" [class.has-error]="addListingForm.controls['zip']?.invalid && addListingForm.controls['zip']?.touched">
             <label for="zip">Zip</label>
             <input type="text" formControlName="zip" class="form-control" id="zip" placeholder="Zip" required>
+            <small *ngIf="addListingForm.controls['zip']?.invalid && addListingForm.controls['zip']?.touched" class="text-danger">Zip is required.</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <p class="text-center">Property Photos</p>
+          <img class="img-fluid rounded" src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" alt="Default Image">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="form-group text-center">
+            <button class="btn btn-primary" type="submit">Submit</button>
           </div>
         </div>
       </div>
-
-      <hr class="my-4">
-
-      <!-- Email -->
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" formControlName="email" class="form-control" id="email" placeholder="Email" required>
-      </div>
-
-      <!-- Phone -->
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="text" formControlName="phone" class="form-control" id="phone" placeholder="Phone" required>
-      </div>
-
-              <!-- Image -->
-              <div class="form-group">
-                <label for="image">Image</label>
-                <input type="file" formControlName="image" class="form-control-file" id="image" (change)="onImageSelected($event)" required>
-              </div>
-
-              <!-- Submit button -->
-              <div class="form-group">
-                <button class="btn btn-primary" type="submit" [disabled]="addListingForm.invalid">Add Listing</button>
-              </div>
-
-            </form>
-          </div>
-      </div>
+    </form>
+  </div>
+</div>

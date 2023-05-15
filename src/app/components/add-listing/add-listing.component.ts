@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ListingsService } from 'src/app/services/listings.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add-listing',
@@ -11,29 +12,8 @@ import { ListingsService } from 'src/app/services/listings.service';
 })
 export class AddListingComponent implements OnInit {
   addListingForm!: FormGroup;
-
-  constructor(
-    private fb: FormBuilder,
-    private listingsService: ListingsService,
-    private router: Router,
-    private authService: AuthService
-  ) { }
-
-  ngOnInit(): void {
-    this.addListingForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      price: ['', Validators.required],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      zip: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      image: [null]
-    });
-  }
-
+  loggedInStudentId : string="";
+  student:any;
   categories = [
     { id: 1, name: "Apartments" },
     { id: 2, name: "Shared Apartments" },
@@ -41,36 +21,79 @@ export class AddListingComponent implements OnInit {
     { id: 4, name: "Condos" },
     { id: 5, name: "Shared Houses" },
     { id: 6, name: "Sublets" },
-];
+  ];
 
-
-  onImageSelected(event: Event): void {
-    const file = (event.target as HTMLInputElement).files;
-    if (file && file.length > 0) {
-      this.addListingForm.patchValue({ image: file[0] });
-      let imageControl = this.addListingForm.get('image');
-      if (imageControl) {
-        imageControl.updateValueAndValidity();
-      }
-    }
+  constructor(
+    private formBuilder: FormBuilder,
+    private listingsService: ListingsService,
+    private router: Router,
+    private authService: AuthService,
+    private userService: UserService
+  ) {
+    this.addListingForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zip: ['', Validators.required],
+      image: ['https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg'],
+      category: ['', Validators.required],
+      studentDto: this.formBuilder.group({
+        studentId: ['']
+      })
+    });
   }
 
-  onSubmit(): void {
+  ngOnInit(): void {
+    let userId = this.authService.getCurrentUserId();
+    this.loggedInStudentId = userId ? userId : "";
+    this.student = {};
+
+    this.userService.getUserDetails(this.loggedInStudentId).subscribe(
+      (response) => {
+        this.student = response;
+        console.log("Student Details: " + this.student.studentId);
+
+        // Update the studentId form control
+        this.addListingForm.get('studentDto')?.get('studentId')?.setValue(this.student.studentId);
+      },
+      (error) => {
+        // Handle error if necessary
+        console.error(error);
+      }
+    );
+  }
+
+  onSubmit = (): void => {
+    console.log('Submitting form...');
     if (this.addListingForm.invalid) {
       return;
     }
 
-    const formData = new FormData();
-    Object.keys(this.addListingForm.value).forEach(key => {
-      formData.append(key, this.addListingForm.value[key]);
-    });
+    const formValue = {
+      ...this.addListingForm.value,
+      studentDto: {
+        ...this.addListingForm.value.studentDto,
+        studentId: this.student.studentId,
+        name: this.student.name,
+        email: this.student.email,
+        phone: this.student.phone,
+        graduationYear: this.student.graduationYear,
+        major: this.student.major
+      }
+    };
 
-    formData.append("StudentId", this.authService.getCurrentUserId());
-
-    this.listingsService.addListing(formData).subscribe(() => {
-      this.router.navigate(['/listings']);
-    }, error => {
-      console.log(error);
-    });
+    this.listingsService.addListing(formValue)
+    .subscribe(
+        response => {
+            this.router.navigate(['/student-dashboard']);
+        },
+        error => {
+            console.error('Error submitting form:', error);
+        }
+    );
   }
 }
+

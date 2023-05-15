@@ -17,8 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    // Get the JWT from the AuthService
-    const token = this.authService.currentUserValue?.token;
+    const token = this.authService.currentUserValue;
 
     // If the token exists, clone the HTTP request and replace the original headers with
     // cloned headers, updated with the Bearer token.

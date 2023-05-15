@@ -16,6 +16,7 @@ import { AddListingComponent } from './components/add-listing/add-listing.compon
 import { LogoutComponent } from './components/logout/logout.component';
 import { ListingDetailsComponent } from './components/listing-details/listing-details.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

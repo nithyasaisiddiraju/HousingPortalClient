@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +23,19 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue() {
-    return this.currentUserSubject.value;
+  public get currentUserValue(): string | null {
+    const user = JSON.parse(localStorage.getItem(this.tokenKey) || '{}');
+    return user && user.token;
   }
 
-  public getCurrentUserId() {
-    return this.currentUserValue.id;
+  public getCurrentUserId(): string | null {
+    const token = this.currentUserValue;
+    console.log("Token:" +token);
+    if (token) {
+      const decoded: any = jwt_decode(token);
+      return decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+    }
+    return null;
   }
 
   isAuthenticated() : boolean {
@@ -35,7 +43,8 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    const user = JSON.parse(localStorage.getItem(this.tokenKey) || '{}');
+    return user && user.token;
   }
 
   login(username: string, password: string) {

@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ListingDetailsComponent } from './listing-details.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { ListingDetailsComponent } from 'src/app/components/listing-details/listing-details.component';
 
 describe('ListingDetailsComponent', () => {
   let component: ListingDetailsComponent;

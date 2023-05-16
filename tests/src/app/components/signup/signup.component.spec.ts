@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ReactiveFormsModule } from '@angular/forms';  // Import ReactiveFormsModule here
-import { SignupComponent } from './signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from 'src/app/components/signup/signup.component';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;

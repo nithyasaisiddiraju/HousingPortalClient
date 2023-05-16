@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { LogoutComponent } from './logout.component';
+import { LogoutComponent } from 'src/app/components/logout/logout.component';
 
 describe('LogoutComponent', () => {
   let component: LogoutComponent;

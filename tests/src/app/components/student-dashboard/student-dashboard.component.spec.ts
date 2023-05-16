@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { StudentDashboardComponent } from './student-dashboard.component';
 import { ListingsService } from 'src/app/services/listings.service';
 import { of } from 'rxjs';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { StudentDashboardComponent } from 'src/app/components/student-dashboard/student-dashboard.component';
 
 describe('StudentDashboardComponent', () => {
   let component: StudentDashboardComponent;

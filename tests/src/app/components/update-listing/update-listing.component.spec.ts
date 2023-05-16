@@ -2,10 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
-import { UpdateListingComponent } from './update-listing.component';
 import { ListingsService } from 'src/app/services/listings.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UpdateListingComponent } from 'src/app/components/update-listing/update-listing.component';
 
 describe('UpdateListingComponent', () => {
   let component: UpdateListingComponent;

@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ListingsService } from './listings.service';
+import { AuthService } from 'src/app/services/auth.service';
 
-describe('ListingsService', () => {
-  let service: ListingsService;
+describe('AuthServiceService', () => {
+  let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],  // add HttpClientTestingModule here
+      imports: [HttpClientTestingModule],
     });
-    service = TestBed.inject(ListingsService);
+    service = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {

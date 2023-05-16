@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ListingsService } from 'src/app/services/listings.service';
 import { UserService } from 'src/app/services/user.service';
-import { AddListingComponent } from './add-listing.component';
 import { of } from 'rxjs';
+import { AddListingComponent } from 'src/app/components/add-listing/add-listing.component';
 
 describe('AddListingComponent', () => {
   let component: AddListingComponent;

@@ -19,8 +19,6 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.authService.currentUserValue;
 
-    // If the token exists, clone the HTTP request and replace the original headers with
-    // cloned headers, updated with the Bearer token.
     if (token) {
       request = request.clone({
         setHeaders: {

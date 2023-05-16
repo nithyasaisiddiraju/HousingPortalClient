@@ -8,6 +8,7 @@ import { AddListingComponent } from './components/add-listing/add-listing.compon
 import { LogoutComponent } from './components/logout/logout.component';
 import { ListingDetailsComponent } from './components/listing-details/listing-details.component';
 import { UpdateListingComponent } from './components/update-listing/update-listing.component';
+import { AccountComponent } from './components/account/account.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'add-listing', component: AddListingComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
   { path: 'listing-details/:id', component: ListingDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'update-listing/:id', component: UpdateListingComponent, canActivate: [AuthGuard] }
+  { path: 'update-listing/:id', component: UpdateListingComponent, canActivate: [AuthGuard] },
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -4,10 +4,10 @@
       Student Registration
     </span>
     <form [formGroup]="signupForm" (ngSubmit)="onSignUp()" class="login-form">
-      <div class="wrap-input" *ngFor="let field of signupFields">
+      <div class="wrap-input" [class.has-error]="signupForm.get(field.name)?.invalid && signupForm.get(field.name)?.touched" *ngFor="let field of signupFields">
         <input [type]="field.type" formControlName="{{field.name}}" class="input" [placeholder]="field.placeholder">
         <span class="focus-input"></span>
-        <div *ngIf="isFieldInvalid(field.name)" class="form-group-error">
+        <div *ngIf="signupForm.get(field.name)?.invalid && signupForm.get(field.name)?.touched" class="form-group-error">
           <small class="text-danger">{{ getFieldErrorMessage(field.name) }}</small>
         </div>
       </div>
@@ -18,7 +18,7 @@
           <label class="form-check-label" for="termsOfService">I agree to the Terms of Service</label>
         </div>
       </div>
-      <div *ngIf="isFieldInvalid('termsOfService') && signupForm.get('termsOfService')?.value === false" class="form-group-error">
+      <div *ngIf="signupForm.get('termsOfService')?.invalid && signupForm.get('termsOfService')?.touched" class="form-group-error">
         <small class="text-danger">You must agree to the Terms of Service</small>
       </div>
 

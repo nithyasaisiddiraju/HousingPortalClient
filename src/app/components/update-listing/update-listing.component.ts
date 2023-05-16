@@ -72,7 +72,7 @@ loadListingDetails(): void {
           this.listing = data;
           if (!this.checkUserAuthorization()) {
               this.snackBar.open('You do not have permission to edit this listing.', 'Close', {
-                  duration: 3000,
+                  duration: 4000,
                   panelClass: 'snackbar-error'
               });
               this.router.navigate(['/listing-details', this.listingId]);
@@ -119,7 +119,7 @@ loadListingDetails(): void {
         response => {
           console.log(response);
           this.snackBar.open('Listing updated successfully!', 'Close', {
-            duration: 3000,
+            duration: 4000,
             panelClass: 'snackbar-success'
           });
           this.router.navigate(['/listing-details', this.listingId]);

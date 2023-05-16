@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ListingsService } from 'src/app/services/listings.service';
 import { UserService } from 'src/app/services/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-listing',
@@ -29,7 +30,8 @@ export class AddListingComponent implements OnInit {
     private listingsService: ListingsService,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private _snackBar: MatSnackBar
   ) {
     this.addListingForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -64,6 +66,12 @@ export class AddListingComponent implements OnInit {
     );
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'OK', {
+      duration: 4000,
+    });
+  }
+
   onSubmit = (): void => {
     console.log('Submitting form...');
     if (this.addListingForm.invalid) {
@@ -87,9 +95,11 @@ export class AddListingComponent implements OnInit {
     .subscribe(
         response => {
             this.router.navigate(['/student-dashboard']);
+            this.openSnackBar('Property listing added successfully'); // Display success message
         },
         error => {
             console.error('Error submitting form:', error);
+            this.openSnackBar('Failed to add property listing'); // Display error message
         }
     );
   }

@@ -5,6 +5,7 @@ export interface Student {
   phone: string;
   major: string;
   graduationYear: number;
+  listings: Listing[];
 }
 
 export interface Listing {

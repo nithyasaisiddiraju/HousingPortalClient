@@ -12,7 +12,7 @@ import jwt_decode from 'jwt-decode';
 export class AuthService {
   baseApiUrl: string = environment.baseApiUrl;
   private tokenKey: string = 'jwt-token';
-  private _authStatus = new Subject<boolean>();
+  private _authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());
   private currentUserSubject: BehaviorSubject<any>;
 
   public authStatus = this._authStatus.asObservable();
@@ -37,6 +37,7 @@ export class AuthService {
     }
     return null;
   }
+
 
   isAuthenticated() : boolean {
     return this.getToken() != null;
@@ -66,9 +67,8 @@ export class AuthService {
     );
   }
 
-  register(email: string, password: string): Observable<any> {
-    const body = { email, password };
-    return this.http.post(`${this.baseApiUrl}/api/user/register`, body);
+  register(payload: any): Observable<any> {
+    return this.http.post(`${this.baseApiUrl}/api/user/register`, payload);
   }
 
   logout() {

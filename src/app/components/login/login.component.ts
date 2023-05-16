@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   openSnackBar(message: string) {
     this._snackBar.open(message, 'OK', {
-      duration: 2000,
+      duration: 4000,
     });
   }
 

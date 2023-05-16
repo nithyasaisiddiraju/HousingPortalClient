@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -13,28 +15,64 @@ export class SignupComponent implements OnInit {
   eyeIcon = 'fa-eye-slash';
 
   signupFields = [
-    { name: 'firstName', placeholder: 'First Name', type: 'text' },
-    { name: 'lastName', placeholder: 'Last Name', type: 'text' },
+    { name: 'username', placeholder: 'Username', type: 'text' },
     { name: 'email', placeholder: 'Email', type: 'email' },
-    { name: 'contact', placeholder: 'Contact', type: 'tel' },
+    { name: 'phone', placeholder: 'Contact', type: 'tel' },
+    { name: 'major', placeholder: 'Major', type: 'text' },
+    { name: 'graduationYear', placeholder: 'Graduation Year', type: 'number' },
     { name: 'password', placeholder: 'Password', type: 'password' },
     { name: 'confirmPassword', placeholder: 'Confirm Password', type: 'password' },
   ];
-
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private _snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      contact: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10), Validators.maxLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      phone: ['', Validators.required],
+      major: ['', Validators.required],
+      graduationYear: [null, [Validators.required, Validators.min(new Date().getFullYear())]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        this.hasNumber(),
+        this.hasCapitalCase(),
+        this.hasSmallCase(),
+        this.hasSpecialCharacters()
+      ]],
       confirmPassword: ['', Validators.required],
       termsOfService: [false, Validators.requiredTrue]
-    }, {
-      validators: this.passwordMatchValidator('password', 'confirmPassword')
-    });
+    }, {validator: this.passwordMatchValidator('password', 'confirmPassword')});
+  }
+
+
+  private hasNumber() {
+    return (control: AbstractControl) => {
+      const regExp = /.*[0-9].*/;
+      return regExp.test(control.value) ? null : { hasNumber: true };
+    }
+  }
+
+  private hasCapitalCase() {
+    return (control: AbstractControl) => {
+      const regExp = /.*[A-Z].*/;
+      return regExp.test(control.value) ? null : { hasCapitalCase: true };
+    }
+  }
+
+  private hasSmallCase() {
+    return (control: AbstractControl) => {
+      const regExp = /.*[a-z].*/;
+      return regExp.test(control.value) ? null : { hasSmallCase: true };
+    }
+  }
+
+  private hasSpecialCharacters() {
+    return (control: AbstractControl) => {
+      const regExp = /.*[\s~`!@#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?()\._].*/;
+      return regExp.test(control.value) ? null : { hasSpecialCharacters: true };
+    }
   }
 
   hideShowPass(): void {
@@ -42,14 +80,30 @@ export class SignupComponent implements OnInit {
     this.eyeIcon = this.isText ? 'fa-eye' : 'fa-eye-slash';
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'OK', {
+      duration: 2000,
+    });
+  }
+
   onSignUp(): void {
     if (this.signupForm.valid) {
-      // Perform signup logic
-      console.log(this.signupForm.value);
+      const payload = this.signupForm.value;
+
+      this.authService.register(payload)
+        .subscribe(response => {
+          this.openSnackBar('Registration successful!');
+          this.router.navigate(['/login']);
+        }, error => {
+          console.error(error);
+          this.openSnackBar(error.error.message);
+        });
     } else {
       this.signupForm.markAllAsTouched();
     }
   }
+
+
 
   private passwordMatchValidator(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup) => {
@@ -76,6 +130,14 @@ export class SignupComponent implements OnInit {
       return `Invalid ${fieldName} address`;
     } else if (field?.errors?.['passwordMismatch']) {
       return `Passwords do not match`;
+    } else if (field?.errors?.['hasNumber']) {
+      return `Password must contain at least one number`;
+    } else if (field?.errors?.['hasCapitalCase']) {
+      return `Password must contain at least one uppercase letter`;
+    } else if (field?.errors?.['hasSmallCase']) {
+      return `Password must contain at least one lowercase letter`;
+    } else if (field?.errors?.['hasSpecialCharacters']) {
+      return `Password must contain at least one special character`;
     }
     return '';
   }

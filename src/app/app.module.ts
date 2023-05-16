@@ -16,6 +16,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { ListingDetailsComponent } from './components/listing-details/listing-details.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { UpdateListingComponent } from './components/update-listing/update-listing.component';
+import { AccountComponent } from './components/account/account.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { UpdateListingComponent } from './components/update-listing/update-listi
     LogoutComponent,
     ListingDetailsComponent,
     UpdateListingComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

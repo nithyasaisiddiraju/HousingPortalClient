@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./listing-details.component.css']
 })
 export class ListingDetailsComponent implements OnInit {
-  id: string = '';
+  listingId: string = '';
   listing?: Listing;
 
   constructor(
@@ -22,15 +22,20 @@ export class ListingDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id') || '';
-    this.listingsService.getListing(this.id).subscribe(
-      (data: Listing) => {
-        this.listing = data;
-      },
-      (error) => {
-        console.error('There was an error!', error);
-      }
-    );
+    this.route.paramMap.subscribe(params => {
+      this.listingId = params.get('id') || '';
+      console.log('ListingId:', this.listingId);
+
+      this.listingsService.getListing(this.listingId).subscribe(
+        (data: Listing) => {
+          this.listing = data;
+          console.log('Received data:', data);
+        },
+        (error) => {
+          console.error('There was an error!', error);
+        }
+      );
+    });
   }
 
   onDelete(listingId: string): void {
@@ -49,7 +54,7 @@ export class ListingDetailsComponent implements OnInit {
     );
   }
 
-  onEdit(id: number) {
-    this.router.navigate(['/update-listing', id]);
+  onEdit(listingId: string) {
+    this.router.navigate(['/update-listing', listingId]);
   }
 }

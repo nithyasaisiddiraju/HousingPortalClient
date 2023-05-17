@@ -1,7 +1,7 @@
 <div class="container custom-height">
   <div class="card mb-4 w-75 mx-auto" *ngIf="user">
     <div class="card-body text-center">
-      <h3 class="card-title">Account Information</h3>
+      <h2 class="card-title">Account Information</h2>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Name: {{ user.name }}</li>
         <li class="list-group-item">Email: {{ user.email }}</li>
@@ -12,14 +12,16 @@
     </div>
 
     <div class="text-center mt-4">
-      <h3>Your Listings</h3>
+      <h3>My Listings</h3>
     </div>
     <div style="height: 20px;"></div>
 
     <div class="row no-gutters justify-content-center" *ngFor="let listing of listings">
       <div class="col-md-4">
         <div class="card-body">
-          <h5 class="card-title text-center">{{ listing.title }}</h5>
+          <h5 class="card-title text-center">
+            <a [routerLink]="['/listing-details', listing.listingId]">{{ listing.title }}</a>
+          </h5>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Description: {{ listing.description }}</li>
             <li class="list-group-item">Address: {{ listing.address }}</li>

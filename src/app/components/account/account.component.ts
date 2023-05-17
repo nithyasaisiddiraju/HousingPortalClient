@@ -30,6 +30,13 @@ export class AccountComponent implements OnInit {
         (listings: Listing[]) => {
           console.log(listings);
           this.listings = listings;
+          listings.forEach(listing => {
+            if (listing.listingId) {
+              console.log(listing.listingId);
+            } else {
+              console.log('Listing id is undefined:', listing);
+            }
+          });
         },
         (error) => {
           console.error('Error retrieving user listings:', error);

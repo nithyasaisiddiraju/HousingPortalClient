@@ -49,8 +49,8 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    const body = { UserName: username, Password: password };
-    return this.http.post<any>(`${this.baseApiUrl}/api/user/authenticate`, body)
+    const body = { Username: username, Password: password };
+    return this.http.post<any>(`${this.baseApiUrl}/User/authenticate`, body)
     .pipe(
       tap(user => {
         if (user && user.token) {
@@ -68,7 +68,7 @@ export class AuthService {
   }
 
   register(payload: any): Observable<any> {
-    return this.http.post(`${this.baseApiUrl}/api/user/register`, payload);
+    return this.http.post(`${this.baseApiUrl}/User/register`, payload);
   }
 
   logout() {

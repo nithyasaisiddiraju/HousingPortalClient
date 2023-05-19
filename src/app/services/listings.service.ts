@@ -14,7 +14,7 @@ export class ListingsService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getAllListings(): Observable<Listing[]> {
-    return this.http.get<Listing[]>(this.baseApiUrl + '/api/listings')
+    return this.http.get<Listing[]>(this.baseApiUrl + '/listings')
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -38,22 +38,22 @@ export class ListingsService {
   addListing(listing: any): Observable<any> {
     console.log('Adding listing...');
     console.log(listing);
-    return this.http.post<any>(`${this.baseApiUrl}/api/listings`, listing, this.httpOptions).pipe(
+    return this.http.post<any>(`${this.baseApiUrl}/listings`, listing, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   getListing(id: string): Observable<Listing> {
-    return this.http.get<Listing>(`${this.baseApiUrl}/api/listings/${id}`);
+    return this.http.get<Listing>(`${this.baseApiUrl}/listings/${id}`);
   }
 
   updateListing(id: string, updateListingRequest: Listing):
   Observable<Listing> {
-    return this.http.put<Listing>(this.baseApiUrl + '/api/listings/' + id,
+    return this.http.put<Listing>(this.baseApiUrl + '/listings/' + id,
     updateListingRequest);
   }
 
   deleteListing(id: string): Observable<Listing> {
-    return this.http.delete<Listing>(this.baseApiUrl + '/api/listings/' + id);
+    return this.http.delete<Listing>(this.baseApiUrl + '/listings/' + id);
   }
 }

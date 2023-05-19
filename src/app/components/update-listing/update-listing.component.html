@@ -30,7 +30,7 @@
               class="text-danger">Price is required.</small>
           </div>
           <div class="form-group">
-            <label for="category">Category</label>
+            <label for="category" class="required-field">Category (*)</label>
             <select formControlName="category" class="form-control" id="category" required>
               <option value="" selected disabled>Category</option>
               <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>

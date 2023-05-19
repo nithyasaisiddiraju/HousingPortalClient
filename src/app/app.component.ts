@@ -14,7 +14,7 @@ export class AppComponent implements OnDestroy {
   title = 'CSUN Off-Campus Housing Portal';
   isAuthenticated = false;
   private authStatusSub: Subscription;
-  loggedUsername!: string;
+  loggedUsername: string = '';
 
   constructor(public authService: AuthService, public router: Router, public UserService: UserService) {
     this.authStatusSub = this.authService.authStatus.subscribe(
@@ -23,19 +23,26 @@ export class AppComponent implements OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
-      const userId = this.authService.getCurrentUserId();
-      if (userId) {
-        this.UserService.getUserDetails(userId).subscribe(
-          (user: Student) => {
-            this.loggedUsername = user.name;
-          },
-          (error) => {
-            console.error('Error retrieving user details:', error);
+    this.authStatusSub = this.authService.authStatus.subscribe(
+      isAuthenticated => {
+        this.isAuthenticated = isAuthenticated;
+        if (isAuthenticated) {
+          const userId = this.authService.getCurrentUserId();
+          console.log('userId:', userId);
+          if (userId) {
+            this.UserService.getUserDetails(userId).subscribe(
+              (user: Student) => {
+                this.loggedUsername = user.name;
+                console.log('loggedUsername:', this.loggedUsername);
+              },
+              (error) => {
+                console.error('Error retrieving user details:', error);
+              }
+            );
           }
-        );
+        }
       }
-    }
+    );
   }
 
   isCurrentRoute(route: string) {

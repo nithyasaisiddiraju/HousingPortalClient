@@ -33,10 +33,10 @@ export class UserService {
   }
 
   getUserDetails(id: string): Observable<Student> {
-    return this.http.get<Student>(`${this.baseApiUrl}/api/user/${id}`, this.httpOptions);
+    return this.http.get<Student>(`${this.baseApiUrl}/user/${id}`, this.httpOptions);
   }
 
   getUserDetailsWithListings(id: string): Observable<Listing[]> {
-    return this.http.get<Listing[]>(`${this.baseApiUrl}/api/user/${id}/listings`, this.httpOptions);
+    return this.http.get<Listing[]>(`${this.baseApiUrl}/user/${id}/listings`, this.httpOptions);
   }
 }

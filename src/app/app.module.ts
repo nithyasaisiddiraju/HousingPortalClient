@@ -13,9 +13,10 @@ import { StudentDashboardComponent } from './components/student-dashboard/studen
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { ListingDetailsComponent } from './components/listing-details/listing-details.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UpdateListingComponent } from './components/update-listing/update-listing.component';
 import { AccountComponent } from './components/account/account.component';
+import { AuthModule } from '@auth0/auth0-angular';
 
 
 @NgModule({
@@ -37,7 +38,14 @@ import { AccountComponent } from './components/account/account.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AuthModule.forRoot({
+      domain: 'dev-mx4cd1prbruu8h7h.us.auth0.com',
+      clientId: 'zAQkK2U6zHiyNh2XI50UaI8quyu9RYNz',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
